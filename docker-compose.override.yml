@@ -1,0 +1,29 @@
+version: '3.8'
+
+# این فایل تنظیمات اضافی برای docker-compose.yml است
+# برای اضافه کردن تنظیمات خاص محیط خود استفاده کنید
+
+services:
+  api_server:
+    ports:
+      - "8080:8080"
+    environment:
+      # تنظیمات اضافی AI API
+      - GENAI_API_KEY=${GENAI_API_KEY}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+
+  web_server:
+    ports:
+      - "3000:3000"
+    environment:
+      # تنظیمات web server اضافی
+      - NEXT_PUBLIC_API_URL=http://localhost:8080
+
+  minio:
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+
+  cache:
+    ports:
+      - "6379:6379"
